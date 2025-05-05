@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anirban Banerjee | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #9197c6;
+      color: #0b0b0b;
+      line-height: 1.7;
+    }
+    .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+    header {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0077b6;
+      font-weight: 500;
+      font-size: 1.05rem;
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section:nth-child(even) {
+      background-color: #f7f9fb;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      color: #0d47a1;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #111;
+    }
+    p, li {
+      font-size: 1.1rem;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-top: 3rem;
+      background-color: #b3e5fc;
+      border-radius: 10px;
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-text p.subtitle {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+    .hero-text .social-icons {
+      margin-top: 1rem;
+    }
+    .social-icons a {
+      margin-right: 1rem;
+      color: #0077b6;
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
+    .hero-img {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-img img {
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 4px solid #fff;
+    }
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      padding: 1.5rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: #0077b6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+    }
+    
+    .square-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .square-tile {
+            position: relative;
+            background-color: #000;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            overflow: hidden;
+            height: 200px;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .square-tile:hover {
+            transform: scale(1.05);
+        }
+
+        .square-tile img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+        .square-tile div {
+            position: relative;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 2;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 9998;
+            display: none;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #0077b6;
+            border-radius: 8px;
+            max-width: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #0077b6;
+        }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f1f1f1;
+      font-size: 0.9rem;
+    }
+    .socials a {
+      margin: 0 0.6rem;
+      text-decoration: none;
+      color: #0077b6;
+      font-weight: 500;
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#about me">About me</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#interests">Interests</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Anirban Banerjee</h1>
+      <p class="subtitle">AI ML Engineer | Developer | Researcher</p>
+      <p>NIT Rourkela '27</p>
+      <p>BTech in Ceramic Engineering</p>
+      <p>Minor in Computer Science and Engineering</p>
+      <div class="social-icons">
+        <a href="https://github.com/anirban1221" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/anirbanbanerjee2003" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://instagram.com/ani.banerjee.125" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="required pictures/profile photo website.jpg" alt="Anirban Banerjee Photo">
+    </div>
+  </section>
+  <section id ="about me">
+        <h2>About Me</h2>
+        <p>Hi! I am Anirban Banerjee. Prefinal year BTech student at NIT Rourkela. I am a AI ML engineer and I like to develop things using 
+            machine learning and AI which will have a real world imapact. My work bridges deep learning, computer vision and natural Language
+            processing, with focus to solve day to day problems. I have developed multiple projects which involves reccommender systems, 
+            time series forcasting, vision transformers and language models.
+        
+        </p>
+        <p>I am comfortable with pyTorch, Tensorflow and other ML frameworks. I am also eager to learn, explore and contribute to developing libraries with 
+            bright future prospects. I would like to collaborate on research and projects involving CV, NLP or llm which can open new pathways for the development of AI.
+        </p>
+  </section>
+  <section id="education">
+    <h2>Education</h2>
+    <h3>Ramakrishna Mission Vidyalaya, Narendrapur</h3>
+    <ul>
+        <li>Madhyamik (Secondary) Examination score: 94.58% (664/700)</li>
+        <li>Higher Seconadry Examination score: 91.2% (456/500)</li>
+    </ul>
+    <h3>National Institute of Technology, Rourkela</h3>
+    <ul>
+        <li>Ceramic Engineering CGPA-8.03 (till date)</li>
+    </ul>
+    </section>
+  
+
+  <section id="achievements">
+    <h2>Achievements</h2>
+    <ul>
+      
+      <li>qualified JEE main 96.54 %ile</li>
+      <li>qualified WBJEE</li>
+    </ul>
+    </section>
+
+  <section id="interests">
+    <h2>Interests and Specializations</h2>
+        <div class="square-grid">
+            <div class="square-tile" onclick="openPopup('ml')">
+                <img src="required pictures/ml pic.jpeg" alt="Machine Learning">
+                <div>Machine Learning Algorithms</div>
+            </div>
+            <div class="square-tile"onclick="openPopup('dl')">
+                <img src="required pictures/dl pic.jpeg" alt="DL">
+                <div>Deep Learning</div>
+            </div>
+            <div class="square-tile"onclick="openPopup('NLP')">
+                <img src="required pictures/nlp pic.jpeg" alt="NLP">
+                <div>Natural Language Processing</div>
+            </div>
+            
+            <div class="square-tile"onclick="openPopup('AI')">
+                <img src="required pictures/ai pic.jpeg" alt="AI">
+                <div>Artificial Intelligence</div>
+            </div>
+            <div class="square-tile"onclick="openPopup('DSA')">
+                <img src="required pictures/dsa picv.jpeg" alt="DSA">
+                <div>Data Structures and Algorithms</div>
+            </div>
+            
+        </div>
+    </section>
+
+  
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="card-list">
+      <div class="card">
+        <strong>VAKYA: An Indian Language Text Segmentation model for NLP tasks</strong>
+        <p>Indian Languages are often diversified and resources are low. Often meaning and context has to be preserved
+            for translation, text summarization and other NLP tasks. So this model makes this process easier by using 
+            heuristics approach, generating embeddings using transformers and graph clustering algorithms for better segmentation.
+        </p>
+        <a href="https://github.com/anirban1221/Segmenting_text_IndianLanguages.git">View on GitHub</a>
+      </div>
+      <div class="card">
+        <strong>Another Project</strong>
+        <p>Description of what it does and your role.</p>
+        <a href="https://github.com/yourusername/another-project">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <div class="card-list">
+      <div class="card">
+        <strong>Title of Paper A</strong>
+        <p>Short description or abstract. [Journal Name, Year]</p>
+      </div>
+      <div class="card">
+        <strong>Title of Paper B</strong>
+        <p>Short description or abstract. [Conference Name, Year]</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: your.email@example.com</p>
+    <div class="socials">
+      <a href="https://github.com/yourusername">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+    </div>
+  </section>
+  <div class="popup-overlay" id="popupOverlay" onclick="closePopup()"></div>
+    <div class="popup" id="popupContent">
+        <span class="close-popup" onclick="closePopup()">&times;</span>
+        <div id="popupText"></div>
+    </div>
+
+  <footer>
+    &copy; 2025 Anirban Banerjee. All rights reserved.
+  </footer>
+
+  <script>
+    const contentMap = {
+        ml: "Worked on classification and regression models using scikit-learn and TensorFlow. <a href='https://github.com/yourprofile/ml-project'>View Project</a>",
+        dl: "Built models for image segmentation and object detection. <a href='https://github.com/yourprofile/cv-project'>View Project</a>",
+        NLP: "Developed an unsupervised Hindi segmenter and fine-tuned TrOCR. <a href='https://github.com/yourprofile/nlp-project'>View Project</a>",
+        AI: "Research in document understanding with transformers. <a href='https://github.com/yourprofile/ai-project'>View Project</a>",
+        DSA: "Solved 300+ problems across LeetCode and GFG. <a href='https://github.com/yourprofile/dsa-snippets'>View Project</a>"
+    };
+
+    function openPopup(topic) {
+        document.getElementById("popupOverlay").style.display = "block";
+        document.getElementById("popupContent").style.display = "block";
+        document.getElementById("popupText").innerHTML = contentMap[topic];
+    }
+
+    function closePopup() {
+        document.getElementById("popupOverlay").style.display = "none";
+        document.getElementById("popupContent").style.display = "none";
+    }
+</script>
+  
+</body>
+</html>
+
